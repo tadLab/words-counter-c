@@ -3,14 +3,19 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-//
-bool isString(char string[1001]){
+//CHECKS IF THERE ARE ONLY WORDS ˆNUMBERS, SYMBOLS
+bool isString(const char string[1001]) {
 
+    for (int index = 0; index < strlen(string); index++) {
+        if (!isalpha(string[index]) && !isspace(string[index])) {
+            return false;
+        }
+    }
 
-
-
+    return true;
 
 }
+
 
 //COUNTS SPACES IN STRING
 int counter(char string[1001]){
@@ -36,12 +41,11 @@ int main(int argc, char const *argv[])
     fgets(userInput, sizeof(userInput), stdin);
 
 
-
-
-
-
-
-    printf("Number of words : %d", counter(userInput));
+    if(!isString(userInput)){
+        printf("There are symbols or numbers in the input.\n");
+    } else{
+        printf("Number of words : %d\n", counter(userInput));
+    }
 
     return 0;
 }
